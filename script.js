@@ -247,7 +247,7 @@ const questionBanks = {
                     "The ancient city had: temples, markets, and baths.",
                     "Many features were found in the ancient city: temples, markets, and baths."
                 ],
-                correct: 1,
+                correct: [0, 2, 3],
                 explanation: "The colon must follow a complete independent clause. Option 1 includes 'including' which makes the first part a fragment. Option 3 places the colon after a verb. Option 4 is also correct, but option 1 is the best example of introducing a list after a complete clause."
             },
             {
@@ -1059,7 +1059,7 @@ const questionBanks = {
                     "Sarah went to bed, after finishing her homework.",
                     "After finishing her homework Sarah went to bed."
                 ],
-                correct: 2,
+                correct: [2, 3],
                 explanation: "Option 3 incorrectly places a comma before the dependent clause at the end. Option 4 is also incorrect (missing comma after introductory clause) but wasn't marked as such."
             },
             {
@@ -1861,7 +1861,7 @@ const questionBanks = {
                 "Several gaps in research were identified while reviewing the literature.",
                 "All of the above are correct"
             ],
-            correct: 0,
+            correct: [0, 1, 2],
             explanation: "Option 1 is the clearest correction by specifying who was reviewing the literature. Option 2 is passive and Option 3 still slightly obscures the actor."
         }
     ]
