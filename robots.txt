@@ -1,6 +1,7 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://phillycheesestake.github.io/sitemap.xml
+Sitemap: https://satgrammarpro.github.io/sitemap.xml
+
 
 
