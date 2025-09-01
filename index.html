@@ -22,87 +22,441 @@
   <meta name="twitter:image" content="https://satgrammarpro.github.io/sat-grammar-preview.png" />
 
   <!-- Styles & Fonts -->
-  <link rel="stylesheet" href="styles.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
-  <!-- Favicon & Canonical -->
-  <link rel="icon" type="image/png" href="favicon.png" />
-  <link rel="canonical" href="https://satgrammarpro.github.io/" />
-
-  <!-- Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-HB8JLJDWF4"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-HB8JLJDWF4');
-  </script>
-
-  <!-- Google Adsense -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6127381019051948"
-    crossorigin="anonymous"></script>
-    
   <style>
-    /* Collapsible navigation styles */
+    :root {
+      --primary: #3a5a78;
+      --secondary: #1e3a5f;
+      --accent: #ff6b6b;
+      --light: #f8f9fa;
+      --dark: #2d3436;
+      --correct: #2ecc71;
+      --incorrect: #e74c3c;
+      --background: #f5f7fa;
+      --card-shadow: 0 10px 20px rgba(0,0,0,0.1);
+      --transition: all 0.3s ease;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.7;
+      color: var(--dark);
+      background-color: var(--background);
+      background-image: linear-gradient(135deg, #f5f7fa 0%, #e4e8ed 100%);
+      padding-top: 70px; /* Space for floating nav */
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+    
+    /* Floating Navigation */
+    .floating-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+      padding: 10px 0;
+      transition: var(--transition);
+      transform: translateY(0);
+    }
+    
+    .floating-nav.hidden {
+      transform: translateY(-100%);
+    }
+    
     .nav-toggle {
-        display: none;
-        position: fixed;
-        top: 15px;
-        right: 15px;
-        background: var(--primary);
-        color: white;
-        border: none;
-        border-radius: 50%;
-        width: 50px;
-        height: 50px;
-        z-index: 1000;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-        cursor: pointer;
+      display: none;
+      position: fixed;
+      top: 15px;
+      right: 15px;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      z-index: 1001;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+      cursor: pointer;
     }
     
-    .nav-container {
-        transition: all 0.3s ease;
+    .floating-nav ul {
+      display: flex;
+      justify-content: center;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      flex-wrap: wrap;
     }
     
-    .nav-container.collapsed {
-        transform: translateY(-100%);
-        opacity: 0;
-        pointer-events: none;
+    .floating-nav li {
+      margin: 0 10px;
     }
     
+    .floating-nav a {
+      color: var(--dark);
+      text-decoration: none;
+      font-weight: 500;
+      padding: 8px 16px;
+      border-radius: 30px;
+      transition: var(--transition);
+      font-size: 0.95rem;
+    }
+    
+    .floating-nav a:hover {
+      color: var(--primary);
+      background: rgba(58, 90, 120, 0.1);
+    }
+    
+    .floating-nav a.active {
+      background: var(--primary);
+      color: white;
+    }
+    
+    /* Header */
+    header {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      padding: 3rem 0;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 2rem;
+    }
+    
+    header::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 5px;
+      background: var(--accent);
+    }
+    
+    h1 {
+      margin: 0;
+      font-size: 2.8rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    
+    header p {
+      font-size: 1.2rem;
+      opacity: 0.9;
+      margin: 0.5rem 0 0;
+      font-weight: 300;
+    }
+    
+    /* Content */
+    h2 {
+      color: var(--secondary);
+      border-bottom: 3px solid var(--accent);
+      padding-bottom: 0.5rem;
+      margin-top: 2.5rem;
+      font-size: 1.8rem;
+      font-weight: 600;
+    }
+    
+    h3 {
+      color: var(--primary);
+      margin-top: 1.8rem;
+      font-size: 1.4rem;
+      font-weight: 500;
+    }
+    
+    /* Category Grid */
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 2rem;
+      margin: 3rem 0;
+    }
+    
+    .category-card {
+      background: white;
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: var(--card-shadow);
+      transition: var(--transition);
+      text-align: center;
+      border-left: 5px solid var(--accent);
+    }
+    
+    .category-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+    }
+    
+    .category-icon {
+      font-size: 3rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+    
+    .category-card h3 {
+      margin: 0.5rem 0 1rem;
+      color: var(--secondary);
+    }
+    
+    .category-card p {
+      margin-bottom: 1.5rem;
+      color: var(--dark);
+      opacity: 0.8;
+    }
+    
+    .btn {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      padding: 0.8rem 1.5rem;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: var(--transition);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    
+    .btn:hover {
+      background: linear-gradient(135deg, var(--secondary), var(--primary));
+      box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+      transform: translateY(-2px);
+    }
+    
+    /* GitHub Section */
+    .github-section {
+      background: linear-gradient(135deg, #2b3137, #24292e);
+      color: white;
+      padding: 2.5rem;
+      border-radius: 12px;
+      margin: 4rem 0;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+      position: relative;
+      overflow: hidden;
+      border-left: 5px solid var(--accent);
+      grid-column: 1 / -1;
+      text-align: center;
+    }
+    
+    .github-section::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 5px;
+      background: var(--accent);
+    }
+    
+    .github-content {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    .github-icon {
+      font-size: 4rem;
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+    
+    .github-section h3 {
+      color: white;
+      font-size: 1.8rem;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+    
+    .github-section p {
+      font-size: 1.1rem;
+      opacity: 0.9;
+      margin-bottom: 1.5rem;
+    }
+    
+    .github-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent);
+      color: white;
+      padding: 1rem 2rem;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      font-size: 1.1rem;
+    }
+    
+    .github-button:hover {
+      background: #ff5252;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+    }
+    
+    /* Footer */
+    footer {
+      background: linear-gradient(135deg, var(--dark), #1a1a1a);
+      color: white;
+      text-align: center;
+      padding: 3rem 0;
+      margin-top: 4rem;
+      position: relative;
+    }
+    
+    footer::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 5px;
+      background: var(--accent);
+    }
+    
+    footer p {
+      margin: 0.5rem 0;
+      opacity: 0.8;
+    }
+    
+    /* Responsive Design */
     @media (max-width: 1024px) {
-        .nav-toggle {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        nav {
-            position: sticky;
-            top: 0;
-            z-index: 900;
-            background: white;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        
-        .nav-container.collapsed {
-            transform: translateY(-100%);
-        }
+      .floating-nav {
+        padding: 8px 0;
+      }
+      
+      .floating-nav ul {
+        gap: 5px;
+      }
+      
+      .floating-nav a {
+        padding: 6px 12px;
+        font-size: 0.9rem;
+      }
+      
+      .nav-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      
+      .floating-nav {
+        transform: translateY(0);
+      }
+      
+      .floating-nav.collapsed {
+        transform: translateY(-100%);
+      }
     }
     
     @media (max-width: 768px) {
-        .nav-toggle {
-            width: 45px;
-            height: 45px;
-        }
+      body {
+        padding-top: 60px;
+      }
+      
+      h1 {
+        font-size: 2.2rem;
+      }
+      
+      .container {
+        padding: 0 1.5rem;
+      }
+      
+      .category-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .github-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 1.5rem;
+      }
+      
+      .github-icon {
+        font-size: 3rem;
+      }
+      
+      .nav-toggle {
+        width: 45px;
+        height: 45px;
+      }
+      
+      .floating-nav ul {
+        flex-direction: column;
+        align-items: center;
+        display: none;
+      }
+      
+      .floating-nav.expanded ul {
+        display: flex;
+      }
+      
+      .floating-nav li {
+        margin: 5px 0;
+        width: 100%;
+        text-align: center;
+      }
+      
+      .floating-nav a {
+        display: block;
+        padding: 10px;
+        border-radius: 8px;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 1.8rem;
+      }
+      
+      header p {
+        font-size: 1rem;
+      }
+      
+      .github-button {
+        padding: 0.8rem 1.5rem;
+        font-size: 1rem;
+      }
     }
   </style>
 </head>
 
 <body>
+    <!-- Floating Navigation -->
+    <nav class="floating-nav" id="floatingNav">
+        <div class="container">
+            <ul>
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="punctuation.html">Punctuation</a></li>
+                <li><a href="commas.html">Commas</a></li>
+                <li><a href="apostrophes.html">Apostrophes</a></li>
+                <li><a href="pronouns.html">Pronouns</a></li>
+                <li><a href="verbs-structure.html">Verbs & Structure</a></li>
+                <li><a href="all-questions.html">All Questions</a></li>
+            </ul>
+        </div>
+    </nav>
+    
     <button class="nav-toggle" id="navToggle">
         <i class="fas fa-bars" id="navIcon"></i>
     </button>
@@ -113,22 +467,6 @@
             <p>Master the 16 Essential Grammar Rules for SAT Success</p>
         </div>
     </header>
-    
-    <div class="nav-container" id="navContainer">
-        <nav>
-            <div class="container">
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="punctuation.html">Punctuation</a></li>
-                    <li><a href="commas.html">Commas</a></li>
-                    <li><a href="apostrophes.html">Apostrophes</a></li>
-                    <li><a href="pronouns.html">Pronouns</a></li>
-                    <li><a href="verbs-structure.html">Verbs & Structure</a></li>
-                    <li><a href="all-questions.html">All Questions</a></li>
-                </ul>
-            </div>
-        </nav>
-    </div>
     
     <main class="container">
         <section>
@@ -190,13 +528,13 @@
                     <a href="all-questions.html" class="btn">Practice Now</a>
                 </div>
                 
-                <div class="github-section" style="grid-column: 1 / -1; text-align: center; margin: 3rem 0;">
-                    <div class="github-content" style="max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 1.5rem;">
+                <div class="github-section">
+                    <div class="github-content">
                         <i class="fab fa-github github-icon"></i>
-                        <div style="width: 100%;">
+                        <div>
                             <h3>Like this project?</h3>
                             <p>Check out more of my work on GitHub</p>
-                            <a class="github-button" href="https://github.com/satgrammarpro" target="_blank" style="display: inline-flex; align-items: center; gap: 10px; padding: 1rem 2rem; font-size: 1.1rem;">
+                            <a class="github-button" href="https://github.com/satgrammarpro" target="_blank">
                                 <i class="fab fa-github"></i> Follow @satgrammarpro
                             </a>
                         </div>
@@ -216,66 +554,77 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            const floatingNav = document.getElementById('floatingNav');
             const navToggle = document.getElementById('navToggle');
             const navIcon = document.getElementById('navIcon');
-            const navContainer = document.getElementById('navContainer');
             
-            // Check if user is on a tablet or mobile device
-            function isMobileDevice() {
-                return window.innerWidth <= 1024;
-            }
-            
-            // Set initial state based on device
-            let navCollapsed = isMobileDevice();
-            if (navCollapsed) {
-                navContainer.classList.add('collapsed');
-                navIcon.classList.remove('fa-bars');
-                navIcon.classList.add('fa-bars');
-            }
-            
-            // Toggle navigation
-            navToggle.addEventListener('click', function() {
-                navCollapsed = !navCollapsed;
-                navContainer.classList.toggle('collapsed');
-                
-                // Change icon based on state
-                if (navCollapsed) {
-                    navIcon.classList.remove('fa-times');
-                    navIcon.classList.add('fa-bars');
-                } else {
-                    navIcon.classList.remove('fa-bars');
-                    navIcon.classList.add('fa-times');
-                }
-            });
-            
-            // Auto-collapse on scroll for mobile
             let lastScrollTop = 0;
+            const navHeight = floatingNav.offsetHeight;
+            let isNavExpanded = false;
+            
+            // Handle scroll behavior
             window.addEventListener('scroll', function() {
-                if (!isMobileDevice()) return;
-                
                 const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-                if (scrollTop > lastScrollTop && scrollTop > 100 && !navCollapsed) {
-                    // Scrolling down - hide nav
-                    navCollapsed = true;
-                    navContainer.classList.add('collapsed');
-                    navIcon.classList.remove('fa-times');
-                    navIcon.classList.add('fa-bars');
+                
+                if (window.innerWidth > 1024) {
+                    // Desktop behavior - hide on scroll down, show on scroll up
+                    if (scrollTop > lastScrollTop && scrollTop > navHeight) {
+                        // Scrolling down
+                        floatingNav.classList.add('hidden');
+                    } else {
+                        // Scrolling up
+                        floatingNav.classList.remove('hidden');
+                    }
+                } else {
+                    // Mobile behavior - always visible when expanded
+                    if (!isNavExpanded && scrollTop > lastScrollTop && scrollTop > navHeight) {
+                        // Scrolling down - hide nav
+                        floatingNav.classList.add('collapsed');
+                    } else if (scrollTop < lastScrollTop) {
+                        // Scrolling up - show nav
+                        floatingNav.classList.remove('collapsed');
+                    }
                 }
+                
                 lastScrollTop = scrollTop;
             });
             
-            // Adjust on window resize
+            // Toggle navigation on mobile
+            if (navToggle) {
+                navToggle.addEventListener('click', function() {
+                    isNavExpanded = !isNavExpanded;
+                    floatingNav.classList.toggle('expanded');
+                    
+                    // Change icon
+                    if (isNavExpanded) {
+                        navIcon.classList.remove('fa-bars');
+                        navIcon.classList.add('fa-times');
+                    } else {
+                        navIcon.classList.remove('fa-times');
+                        navIcon.classList.add('fa-bars');
+                    }
+                });
+            }
+            
+            // Close mobile nav when clicking outside
+            document.addEventListener('click', function(event) {
+                if (isNavExpanded && 
+                    !floatingNav.contains(event.target) && 
+                    event.target !== navToggle && 
+                    !navToggle.contains(event.target)) {
+                    isNavExpanded = false;
+                    floatingNav.classList.remove('expanded');
+                    navIcon.classList.remove('fa-times');
+                    navIcon.classList.add('fa-bars');
+                }
+            });
+            
+            // Handle resize
             window.addEventListener('resize', function() {
-                if (!isMobileDevice()) {
-                    // On desktop, ensure nav is always visible
-                    navCollapsed = false;
-                    navContainer.classList.remove('collapsed');
-                    navIcon.classList.remove('fa-bars');
-                    navIcon.classList.add('fa-times');
-                } else {
-                    // On mobile, start with nav collapsed
-                    navCollapsed = true;
-                    navContainer.classList.add('collapsed');
+                if (window.innerWidth > 1024) {
+                    // Reset mobile states on desktop
+                    isNavExpanded = false;
+                    floatingNav.classList.remove('collapsed', 'expanded');
                     navIcon.classList.remove('fa-times');
                     navIcon.classList.add('fa-bars');
                 }
