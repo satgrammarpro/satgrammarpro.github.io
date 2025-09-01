@@ -2299,11 +2299,15 @@ class PracticeSession {
     }
 
     // Initialize all practice sessions
-    initializeAllSessions() {
-        for (let rule = 1; rule <= 16; rule++) {
+    initializeRuleSessions() {
+    // Check which rules exist on this page
+    for (let rule = 1; rule <= 16; rule++) {
+        const practiceSection = document.getElementById(`practice-questions-${rule}`);
+        if (practiceSection) {
             this.setupPracticeSession(rule);
         }
     }
+}
 
     // Setup practice session for a specific rule
     setupPracticeSession(ruleNumber) {
@@ -2523,7 +2527,8 @@ const practiceSession = new PracticeSession();
 
 // Initialize when page loads
 document.addEventListener('DOMContentLoaded', function() {
-    practiceSession.initializeAllSessions();
+    const practiceSession = new PracticeSession();
+    practiceSession.initializeRuleSessions();
 });
 
 console.log(`Added ${options.length} option listeners for rule ${ruleNumber}`);
