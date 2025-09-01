@@ -65,6 +65,88 @@
                 <li><a href="pronouns.html">Pronouns</a></li>
                 <li><a href="verbs-structure.html">Verbs & Structure</a></li>
                 <li><a href="all-questions.html">All Questions</a></li>
+
+                <style>
+        /* Collapsible navigation styles */
+        .nav-toggle {
+            display: none;
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            cursor: pointer;
+        }
+        
+        .nav-container {
+            transition: all 0.3s ease;
+        }
+        
+        .nav-container.collapsed {
+            transform: translateY(-100%);
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .nav-container.collapsed + main {
+            margin-top: 0;
+        }
+        
+        .nav-expand-button {
+            display: none;
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            z-index: 999;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            cursor: pointer;
+        }
+        
+        @media (max-width: 1024px) {
+            .nav-toggle, .nav-expand-button {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            
+            nav {
+                position: sticky;
+                top: 0;
+                z-index: 900;
+                background: white;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            }
+            
+            .nav-container.collapsed {
+                transform: translateY(-100%);
+            }
+            
+            .nav-expand-button.visible {
+                display: flex;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-toggle, .nav-expand-button {
+                width: 45px;
+                height: 45px;
+            }
+        }
+    </style>
+
+                
             </ul>
         </div>
     </nav>
@@ -152,5 +234,62 @@
             <p>© 2025 Phil Lin. All rights reserved.</p>
         </div>
     </footer>
+
+  <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const navToggle = document.getElementById('navToggle');
+            const navExpand = document.getElementById('navExpand');
+            const navContainer = document.getElementById('navContainer');
+            
+            // Check if user is on a tablet or mobile device
+            function isMobileDevice() {
+                return window.innerWidth <= 1024;
+            }
+            
+            // Set initial state based on device
+            if (isMobileDevice()) {
+                navContainer.classList.add('collapsed');
+                navExpand.classList.add('visible');
+            }
+            
+            // Toggle navigation
+            navToggle.addEventListener('click', function() {
+                navContainer.classList.toggle('collapsed');
+                navExpand.classList.toggle('visible');
+            });
+            
+            // Expand navigation
+            navExpand.addEventListener('click', function() {
+                navContainer.classList.remove('collapsed');
+                navExpand.classList.remove('visible');
+            });
+            
+            // Auto-collapse on scroll for mobile
+            let lastScrollTop = 0;
+            window.addEventListener('scroll', function() {
+                if (!isMobileDevice()) return;
+                
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                if (scrollTop > lastScrollTop && scrollTop > 100) {
+                    // Scrolling down - hide nav
+                    navContainer.classList.add('collapsed');
+                    navExpand.classList.add('visible');
+                } else if (scrollTop < lastScrollTop) {
+                    // Scrolling up - show nav
+                    navContainer.classList.remove('collapsed');
+                    navExpand.classList.remove('visible');
+                }
+                lastScrollTop = scrollTop;
+            });
+            
+            // Adjust on window resize
+            window.addEventListener('resize', function() {
+                if (!isMobileDevice()) {
+                    navContainer.classList.remove('collapsed');
+                    navExpand.classList.remove('visible');
+                }
+            });
+        });
+    </script>
 </body>
 </html>
