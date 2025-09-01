@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Apostrophe Rules - SAT Grammar Practice</title>
+    <link href="styles.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>SAT Apostrophe Rules</h1>
+            <p>Master possessive forms and contractions to avoid common errors</p>
+        </div>
+    </header>
+    
+    <nav>
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="punctuation.html">Punctuation</a></li>
+                <li><a href="commas.html">Commas</a></li>
+                <li><a href="apostrophes.html">Apostrophes</a></li>
+                <li><a href="pronouns.html">Pronouns</a></li>
+                <li><a href="verbs-structure.html">Verbs & Structure</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <main class="container">
+        <!-- Apostrophes Section -->
+        <section class="group-header" id="apostrophes">
+            <h2>Apostrophes</h2>
+            <p>Understand possessive forms and contractions to avoid common errors.</p>
+        </section>
+        
+        <!-- Rule 9: Apostrophes -->
+        <section class="rule-card" id="rule9">
+            <h2><span class="rule-number">9</span>Apostrophes</h2>
+            <h3>Rule:</h3>
+            <p>Apostrophes show possession and form contractions. Know the difference between its/it's, whose/who's, etc.</p>
+            <h3>Key Points:</h3>
+            <ul>
+                <li>Possessive: add 's to singular nouns, ' to plural nouns ending in s</li>
+                <li>Contractions: it's = it is, who's = who is, they're = they are</li>
+                <li>Possessive pronouns (its, whose, theirs) don't use apostrophes</li>
+                <li><strong>Whose vs. Who's:</strong>
+                    <ul>
+                        <li><strong>Who's</strong> is a contraction of "who is" or "who has."</li>
+                        <li><strong>Whose</strong> is the possessive form, showing ownership.</li>
+                        <li><strong>Trick:</strong> Replace "who's" with "who is" in the sentence. If it doesn't make sense, use "whose."</li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="example">
+                <strong>Correct:</strong> "Who's coming to the party?" (Who is coming)<br/>
+                <strong>Correct:</strong> "Whose book is this?" (The book belongs to whom?)<br/>
+                <strong>Incorrect:</strong> "Who's birthday is it?" → "Who is birthday is it?" (Doesn't make sense → use "whose")
+            </div>
+            <div class="practice-section">
+                <h3>Practice Questions</h3>
+                <div class="difficulty-selector">
+                    <label for="difficulty-9">Difficulty:</label>
+                    <select class="difficulty-dropdown" id="difficulty-9">
+                        <option value="easy">Easy</option>
+                        <option selected value="medium">Medium</option>
+                        <option value="hard">Hard</option>
+                    </select>
+                </div>
+                <div class="score-display">Score: <span id="score-9">0</span> / <span id="total-9">5</span></div>
+                <div id="practice-questions-9"></div>
+                <div class="navigation-buttons">
+                    <button id="prev-9">Previous</button>
+                    <button id="next-9">Next Question</button>
+                </div>
+            </div>
+        </section>
+        <div class="github-section">
+                  <div class="github-content">
+                      <i class="fab fa-github github-icon"></i>
+                      <div>
+                        <h3>Like this project?</h3>
+                        <p>Check out more of my work on GitHub</p>
+                        <a class="github-button" href="https://github.com/satgrammarpro" target="_blank">
+                            <i class="fab fa-github"></i> Follow @satgrammarpro
+                            </a>
+                        </div>
+                  </div>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <p>SAT Grammar Rules - Based on Erica Meltzer's "The Critical Reader"</p>
+            <p>Educational resource for SAT preparation</p>
+            <p>© 2025 Phil Lin. All rights reserved.</p>
+        </div>
+    </footer>
+    
+    <script src="script.js"></script>
+    <script>
+        // Initialize only the apostrophe rule (9)
+        document.addEventListener('DOMContentLoaded', function() {
+            const practiceSession = new PracticeSession();
+            
+            // Initialize only rule 9 for this page
+            practiceSession.setupPracticeSession(9);
+        });
+    </script>
+</body>
+</html>
