@@ -551,56 +551,62 @@ button:disabled {
     line-height: 1.6;
 }
 
-/* GitHub Banner */
-.follow-github {
-    text-align: center;
-    font-size: 1.3rem;
-    font-weight: bold;
-    background: linear-gradient(135deg, #fff3cd, #ffe69c);
-    color: #856404;
-    padding: 1.5rem;
-    border-radius: 12px;
+/* Category Cards */
+.category-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
     margin: 3rem 0;
+}
+
+.category-card {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
     box-shadow: var(--card-shadow);
-    position: relative;
-    overflow: hidden;
-}
-
-.follow-github::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 5px;
-    background: #ffc107;
-}
-
-.follow-github a {
-    color: #0c5460;
-    text-decoration: none;
-    font-weight: 600;
     transition: var(--transition);
-    position: relative;
+    text-align: center;
+    border-left: 5px solid var(--accent);
 }
 
-.follow-github a:hover {
+.category-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+}
+
+.category-icon {
+    font-size: 3rem;
     color: var(--primary);
+    margin-bottom: 1rem;
 }
 
-.follow-github a::after {
-    content: "";
-    position: absolute;
-    bottom: -2px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: var(--primary);
+.category-card h3 {
+    margin: 0.5rem 0 1rem;
+    color: var(--secondary);
+}
+
+.category-card p {
+    margin-bottom: 1.5rem;
+    color: var(--dark);
+    opacity: 0.8;
+}
+
+.btn {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 500;
     transition: var(--transition);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
-.follow-github a:hover::after {
-    width: 100%;
+.btn:hover {
+    background: linear-gradient(135deg, var(--secondary), var(--primary));
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+    transform: translateY(-2px);
 }
 
 /* Responsive Design */
@@ -633,6 +639,10 @@ button:disabled {
     
     .group-header h2 {
         font-size: 1.6rem;
+    }
+    
+    .category-grid {
+        grid-template-columns: 1fr;
     }
 }
 
@@ -755,8 +765,10 @@ button:disabled {
         text-align: center;
         gap: 1.5rem;
     }
-    
     .github-icon {
         font-size: 3rem;
     }
 }
+
+
+
