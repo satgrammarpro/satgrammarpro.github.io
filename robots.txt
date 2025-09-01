@@ -1,7 +1,3 @@
 User-agent: *
 Allow: /
-
 Sitemap: https://satgrammarpro.github.io/sitemap.xml
-
-
-
