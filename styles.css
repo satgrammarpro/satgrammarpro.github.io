@@ -772,37 +772,19 @@ button:disabled {
 
 /* ===== FLOATING NAVIGATION STYLES ===== */
 .floating-nav {
-    position: fixed;
+    background: white;
+    padding: 1rem 0;
+    position: sticky;
     top: 0;
-    left: 0;
-    right: 0;
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
-    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
     z-index: 1000;
-    padding: 10px 0;
-    transition: all 0.3s ease;
-    transform: translateY(0);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    width: 100%;
 }
 
-.floating-nav.hidden {
-    transform: translateY(-100%);
-}
-
-.nav-toggle {
-    display: none;
-    position: fixed;
-    top: 15px;
-    right: 15px;
-    background: var(--primary);
-    color: white;
-    border: none;
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
-    z-index: 1001;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-    cursor: pointer;
+.floating-nav .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
 }
 
 .floating-nav ul {
@@ -812,20 +794,22 @@ button:disabled {
     padding: 0;
     margin: 0;
     flex-wrap: wrap;
+    gap: 5px;
 }
 
 .floating-nav li {
-    margin: 0 10px;
+    margin: 0;
 }
 
 .floating-nav a {
     color: var(--dark);
     text-decoration: none;
     font-weight: 500;
-    padding: 8px 16px;
+    padding: 10px 18px;
     border-radius: 30px;
-    transition: all 0.3s ease;
-    font-size: 0.95rem;
+    transition: var(--transition);
+    font-size: 1rem;
+    display: block;
 }
 
 .floating-nav a:hover {
@@ -833,75 +817,87 @@ button:disabled {
     background: rgba(58, 90, 120, 0.1);
 }
 
-.floating-nav a.active {
+/* Mobile Navigation Toggle */
+.nav-toggle {
+    display: none;
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    z-index: 1001;
     background: var(--primary);
     color: white;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    /* Center the icon */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
 }
 
-/* Adjust body padding for floating nav */
-body {
-    padding-top: 70px;
+.nav-toggle i {
+    /* Ensure the icon is properly centered */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
 }
 
 /* Mobile styles */
-@media (max-width: 1024px) {
-    .floating-nav {
-        padding: 8px 0;
-    }
-    
-    .floating-nav ul {
-        gap: 5px;
-    }
-    
-    .floating-nav a {
-        padding: 6px 12px;
-        font-size: 0.9rem;
-    }
-    
+@media (max-width: 768px) {
     .nav-toggle {
-        display: flex;
+        display: flex; /* Changed from display: block */
         align-items: center;
         justify-content: center;
     }
     
     .floating-nav {
-        transform: translateY(0);
+        position: fixed;
+        top: 0;
+        left: -100%;
+        height: 100vh;
+        width: 80%;
+        max-width: 300px;
+        background: white;
+        box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+        transition: left 0.3s ease;
+        padding: 2rem 0;
+        overflow-y: auto;
     }
     
-    .floating-nav.collapsed {
-        transform: translateY(-100%);
-    }
-}
-
-@media (max-width: 768px) {
-    body {
-        padding-top: 60px;
-    }
-    
-    .nav-toggle {
-        width: 45px;
-        height: 45px;
+    .floating-nav.active {
+        left: 0;
     }
     
     .floating-nav ul {
         flex-direction: column;
-        align-items: center;
-        display: none;
-    }
-    
-    .floating-nav.expanded ul {
-        display: flex;
+        padding: 2rem;
     }
     
     .floating-nav li {
-        margin: 5px 0;
-        width: 100%;
-        text-align: center;
+        margin: 0.5rem 0;
     }
     
     .floating-nav a {
-        display: block;
-        padding: 10px;
+        padding: 15px 20px;
         border-radius: 8px;
+        text-align: left;
     }
+}
+
+/* Ensure the hamburger icon is properly centered in all viewports */
+.fa-bars, .fa-times {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
 }
