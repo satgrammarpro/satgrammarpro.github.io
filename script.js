@@ -2286,6 +2286,47 @@ const questionBanks = {
     ]
 }
 };
+
+document.addEventListener('DOMContentLoaded', function() {
+    const navToggle = document.getElementById('navToggle');
+    const floatingNav = document.getElementById('floatingNav');
+    const navIcon = document.getElementById('navIcon');
+    
+    if (navToggle && floatingNav) {
+        navToggle.addEventListener('click', function() {
+            floatingNav.classList.toggle('active');
+            if (floatingNav.classList.contains('active')) {
+                navIcon.classList.remove('fa-bars');
+                navIcon.classList.add('fa-times');
+            } else {
+                navIcon.classList.remove('fa-times');
+                navIcon.classList.add('fa-bars');
+            }
+        });
+        
+        // Close nav when clicking outside
+        document.addEventListener('click', function(e) {
+            if (floatingNav.classList.contains('active') && 
+                !floatingNav.contains(e.target) && 
+                !navToggle.contains(e.target)) {
+                floatingNav.classList.remove('active');
+                navIcon.classList.remove('fa-times');
+                navIcon.classList.add('fa-bars');
+            }
+        });
+        
+        // Close nav when clicking on links
+        const navLinks = floatingNav.querySelectorAll('a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                floatingNav.classList.remove('active');
+                navIcon.classList.remove('fa-times');
+                navIcon.classList.add('fa-bars');
+            });
+        });
+    }
+});
+
 // Floating navigation functionality
 function initFloatingNav() {
     const floatingNav = document.getElementById('floatingNav');
