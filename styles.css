@@ -770,5 +770,138 @@ button:disabled {
     }
 }
 
+/* ===== FLOATING NAVIGATION STYLES ===== */
+.floating-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    padding: 10px 0;
+    transition: all 0.3s ease;
+    transform: translateY(0);
+}
 
+.floating-nav.hidden {
+    transform: translateY(-100%);
+}
 
+.nav-toggle {
+    display: none;
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    z-index: 1001;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    cursor: pointer;
+}
+
+.floating-nav ul {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    flex-wrap: wrap;
+}
+
+.floating-nav li {
+    margin: 0 10px;
+}
+
+.floating-nav a {
+    color: var(--dark);
+    text-decoration: none;
+    font-weight: 500;
+    padding: 8px 16px;
+    border-radius: 30px;
+    transition: all 0.3s ease;
+    font-size: 0.95rem;
+}
+
+.floating-nav a:hover {
+    color: var(--primary);
+    background: rgba(58, 90, 120, 0.1);
+}
+
+.floating-nav a.active {
+    background: var(--primary);
+    color: white;
+}
+
+/* Adjust body padding for floating nav */
+body {
+    padding-top: 70px;
+}
+
+/* Mobile styles */
+@media (max-width: 1024px) {
+    .floating-nav {
+        padding: 8px 0;
+    }
+    
+    .floating-nav ul {
+        gap: 5px;
+    }
+    
+    .floating-nav a {
+        padding: 6px 12px;
+        font-size: 0.9rem;
+    }
+    
+    .nav-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .floating-nav {
+        transform: translateY(0);
+    }
+    
+    .floating-nav.collapsed {
+        transform: translateY(-100%);
+    }
+}
+
+@media (max-width: 768px) {
+    body {
+        padding-top: 60px;
+    }
+    
+    .nav-toggle {
+        width: 45px;
+        height: 45px;
+    }
+    
+    .floating-nav ul {
+        flex-direction: column;
+        align-items: center;
+        display: none;
+    }
+    
+    .floating-nav.expanded ul {
+        display: flex;
+    }
+    
+    .floating-nav li {
+        margin: 5px 0;
+        width: 100%;
+        text-align: center;
+    }
+    
+    .floating-nav a {
+        display: block;
+        padding: 10px;
+        border-radius: 8px;
+    }
+}
