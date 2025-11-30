@@ -247,8 +247,8 @@ const questionBanks = {
                     "The ancient city had: temples, markets, and baths.",
                     "Many features were found in the ancient city: temples, markets, and baths."
                 ],
-                correct: [0, 2, 3],
-                explanation: "The colon must follow a complete independent clause. Option 1 includes 'including' which makes the first part a fragment. Option 3 places the colon after a verb. Option 4 is also correct, but option 1 is the best example of introducing a list after a complete clause."
+                correct: [1, 3],
+                explanation: "The colon must follow a complete independent clause. Options 2 and 4 work because the text before the colon is a full sentence that introduces the list. Option 1 is a fragment and option 3 places the colon directly after a verb, so both are incorrect."
             },
             {
                 question: "Analyze the following sentence: 'The scientist presented her findings—a groundbreaking discovery that challenged existing theories.' Is the dash used correctly?",
@@ -1060,7 +1060,7 @@ const questionBanks = {
                     "After finishing her homework Sarah went to bed."
                 ],
                 correct: [2, 3],
-                explanation: "Option 3 incorrectly places a comma before the dependent clause at the end. Option 4 is also incorrect (missing comma after introductory clause) but wasn't marked as such."
+                explanation: "Options 3 and 4 are incorrect. Option 3 has an unnecessary comma before a dependent clause, and option 4 is missing the comma that should follow the introductory phrase."
             },
             {
                 question: "Choose the proper punctuation:",
@@ -1861,8 +1861,8 @@ const questionBanks = {
                 "Several gaps in research were identified while reviewing the literature.",
                 "All of the above are correct"
             ],
-            correct: [0, 1, 2],
-            explanation: "Option 1 is the clearest correction by specifying who was reviewing the literature. Option 2 is passive and Option 3 still slightly obscures the actor."
+            correct: [0, 1],
+            explanation: "Options 1 and 2 clarify the subject performing the review. Option 3 still leaves the modifier dangling because it never names who was reviewing, so it should not be selected."
         }
     ]
 },
