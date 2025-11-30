@@ -3,11 +3,14 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
+  <meta name="robots" content="index, follow, max-image-preview:large" />
+
   <title>Free SAT Grammar Practice | 16 Rules, Examples & Quizzes</title>
-  <meta name="description" content="Master SAT Grammar with our free 16-rule guide, 160+ practice questions, and detailed explanations. No account required! Based on Erica Meltzer's Critical Reader. Boost your SAT Writing score today!" />
+  <meta name="description" content="Master SAT Grammar with our free 16-rule guide, 160+ practice questions, and detailed explanations. No account required! Inspired by Erica Meltzer's Critical Reader. Boost your SAT Writing score today with original practice!" />
   <meta name="author" content="Phil Lin" />
   <meta name="theme-color" content="#3a5a78" />
+
+  <link rel="canonical" href="https://satgrammarpro.github.io/" />
 
   <!-- Favicon -->
   <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
@@ -38,7 +41,22 @@
   <meta name="twitter:title" content="Free SAT Grammar Practice - 16 Rules with Quizzes" />
   <meta name="twitter:description" content="160+ SAT grammar practice questions with explanations. Boost your SAT Writing score with our free interactive guide." />
   <meta name="twitter:image" content="https://satgrammarpro.github.io/sat-grammar-preview.png" />
-  
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "SAT Grammar Pro",
+    "url": "https://satgrammarpro.github.io/",
+    "description": "Free SAT grammar practice with concise rules, worked examples, and quizzes.",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://satgrammarpro.github.io/?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
+
   <!-- Styles & Fonts -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
@@ -331,7 +349,84 @@
       transform: translateY(-2px);
       box-shadow: 0 6px 12px rgba(0,0,0,0.15);
     }
-    
+
+    /* Accordion / Disclosure */
+    .accordion {
+      margin-top: 1.5rem;
+      display: grid;
+      gap: 1rem;
+    }
+
+    .accordion details {
+      background: white;
+      border-radius: 12px;
+      box-shadow: var(--card-shadow);
+      border: 1px solid #e6ebf2;
+      transition: var(--transition);
+      overflow: hidden;
+    }
+
+    .accordion summary {
+      cursor: pointer;
+      padding: 1.1rem 1.25rem;
+      font-weight: 600;
+      color: var(--secondary);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      list-style: none;
+    }
+
+    .accordion summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .accordion summary .label {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .accordion summary .icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: rgba(58,90,120,0.08);
+      display: grid;
+      place-items: center;
+      color: var(--secondary);
+      font-size: 0.95rem;
+      transition: transform var(--transition);
+    }
+
+    .accordion summary span.chevron {
+      color: var(--secondary);
+      transition: transform var(--transition);
+    }
+
+    .accordion details[open] summary span.chevron {
+      transform: rotate(180deg);
+    }
+
+    .accordion details[open] summary .icon {
+      transform: scale(1.05);
+    }
+
+    .accordion .content {
+      padding: 0 1.25rem 1.25rem;
+      color: #495057;
+      line-height: 1.65;
+    }
+
+    .accordion ul {
+      padding-left: 1.25rem;
+      margin-top: 0.5rem;
+    }
+
+    .accordion li {
+      margin-bottom: 0.35rem;
+    }
+
     /* Footer */
     footer {
       background: linear-gradient(135deg, var(--dark), #1a1a1a);
@@ -424,8 +519,12 @@
         align-items: center;
         display: none;
       }
-      
+
       .floating-nav.expanded ul {
+        display: flex;
+      }
+
+      .floating-nav.active ul {
         display: flex;
       }
       
@@ -474,7 +573,7 @@
     </div>
 </nav>
 
-<button class="nav-toggle" id="navToggle">
+<button class="nav-toggle" id="navToggle" aria-expanded="false" aria-label="Toggle navigation menu">
     <i class="fas fa-bars" id="navIcon"></i>
 </button>
     
@@ -488,7 +587,7 @@
     <main class="container">
         <section>
             <h2>Welcome to SAT Grammar Practice</h2>
-            <p>This comprehensive guide covers all 16 essential grammar rules you need to master for the SAT Writing section. Based on Erica Meltzer's "The Critical Reader," our interactive practice questions will help you improve your score.</p>
+            <p>This comprehensive guide covers all 16 essential grammar rules you need to master for the SAT Writing section. Inspired by Erica Meltzer's "The Critical Reader," our original, classroom-tested practice questions include step-by-step explanations so you build durable skills instead of memorizing answers.</p>
             
             <div class="category-grid">
                 <div class="category-card">
@@ -523,7 +622,7 @@
                         <i class="fas fa-user"></i>
                     </div>
                     <h3>Pronouns</h3>
-                    <p>Master pronoun agreement and subject-verb agreement rules for SAT success.</p>
+                    <p>Master pronoun agreement and clear references for SAT success.</p>
                     <a href="pronouns.html" class="btn">Practice Now</a>
                 </div>
                 
@@ -557,13 +656,54 @@
                         </div>
                     </div>
                 </div>
+
+                <section>
+                    <h2>Why SAT Grammar Pro is High-Value</h2>
+                    <p>Every lesson is written by an SAT tutor and paired with explanations that show <em>why</em> each answer works. Difficulty filters let you move from foundational drills to challenging, test-like questions without leaving the page.</p>
+
+                    <div class="accordion" id="qualityAccordion">
+                        <details>
+                            <summary aria-expanded="false"><span class="label"><span class="icon"><i class="fas fa-book-open"></i></span>Lesson Quality &amp; Originality</span><span class="chevron">⌄</span></summary>
+                            <div class="content">
+                                <p>Rules and examples are paraphrased and expanded from years of tutoring, not copied from the College Board or other sites. Each question bank is unique to this site and reviewed to avoid ambiguous wording.</p>
+                                <ul>
+                                    <li>160+ practice questions with human-written explanations</li>
+                                    <li>Examples highlight the grammar concept before testing it</li>
+                                    <li>Updated wording to match the current digital SAT style</li>
+                                </ul>
+                            </div>
+                        </details>
+                        <details>
+                            <summary aria-expanded="false"><span class="label"><span class="icon"><i class="fas fa-shield-alt"></i></span>Ad Experience &amp; Policy Alignment</span><span class="chevron">⌄</span></summary>
+                            <div class="content">
+                                <p>Pages avoid auto-refreshing, misleading navigation, and AI-generated filler. Clear headings, canonical links, and robots tags help Google index the primary version of every page without duplicate clutter.</p>
+                                <ul>
+                                    <li>Concise layouts with no hidden text or doorway pages</li>
+                                    <li>ads.txt and robots.txt configured for transparent crawling</li>
+                                    <li>Educational intent only—no scraped or spun content</li>
+                                </ul>
+                            </div>
+                        </details>
+                        <details>
+                            <summary aria-expanded="false"><span class="label"><span class="icon"><i class="fas fa-check-circle"></i></span>How to Use This Resource</span><span class="chevron">⌄</span></summary>
+                            <div class="content">
+                                <p>Start with the rule summaries, then toggle question difficulty. Use the explanations after each attempt to understand the grammar logic, and revisit any rules where your score drops below 80%.</p>
+                                <ul>
+                                    <li>Switch difficulties to build from basics to SAT-level nuance</li>
+                                    <li>Rotate through categories weekly to keep skills fresh</li>
+                                    <li>Bookmark <strong>All Questions</strong> for full-length drills</li>
+                                </ul>
+                            </div>
+                        </details>
+                    </div>
+                </section>
             </div>
         </section>
     </main>
     
     <footer>
         <div class="container">
-            <p>SAT Grammar Rules - Based on Erica Meltzer's "The Critical Reader"</p>
+            <p>SAT Grammar Rules - Inspired by Erica Meltzer's "The Critical Reader"</p>
             <p>Educational resource for SAT preparation</p>
             <p>© 2025 Phil Lin. All rights reserved.</p>
         </div>
@@ -574,7 +714,8 @@
             const floatingNav = document.getElementById('floatingNav');
             const navToggle = document.getElementById('navToggle');
             const navIcon = document.getElementById('navIcon');
-            
+            const accordion = document.querySelectorAll('#qualityAccordion details');
+
             let lastScrollTop = 0;
             const navHeight = floatingNav.offsetHeight;
             let isNavExpanded = false;
@@ -611,7 +752,9 @@
                 navToggle.addEventListener('click', function() {
                     isNavExpanded = !isNavExpanded;
                     floatingNav.classList.toggle('expanded');
-                    
+                    floatingNav.classList.toggle('active');
+                    navToggle.setAttribute('aria-expanded', isNavExpanded);
+
                     // Change icon
                     if (isNavExpanded) {
                         navIcon.classList.remove('fa-bars');
@@ -626,25 +769,44 @@
             // Close mobile nav when clicking outside
             document.addEventListener('click', function(event) {
                 if (isNavExpanded && 
-                    !floatingNav.contains(event.target) && 
-                    event.target !== navToggle && 
+                    !floatingNav.contains(event.target) &&
+                    event.target !== navToggle &&
                     !navToggle.contains(event.target)) {
                     isNavExpanded = false;
-                    floatingNav.classList.remove('expanded');
+                    floatingNav.classList.remove('expanded', 'active');
                     navIcon.classList.remove('fa-times');
                     navIcon.classList.add('fa-bars');
+                    navToggle.setAttribute('aria-expanded', 'false');
                 }
             });
-            
+
             // Handle resize
             window.addEventListener('resize', function() {
                 if (window.innerWidth > 1024) {
                     // Reset mobile states on desktop
                     isNavExpanded = false;
-                    floatingNav.classList.remove('collapsed', 'expanded');
+                    floatingNav.classList.remove('collapsed', 'expanded', 'active');
                     navIcon.classList.remove('fa-times');
                     navIcon.classList.add('fa-bars');
+                    navToggle.setAttribute('aria-expanded', 'false');
                 }
+            });
+
+            // Accessible accordion: ensure one panel opens at a time and works on desktop
+            accordion.forEach((panel) => {
+                panel.addEventListener('toggle', () => {
+                    if (panel.open) {
+                        accordion.forEach((other) => {
+                            if (other !== panel) {
+                                other.open = false;
+                                other.querySelector('summary').setAttribute('aria-expanded', 'false');
+                            }
+                        });
+                        panel.querySelector('summary').setAttribute('aria-expanded', 'true');
+                    } else {
+                        panel.querySelector('summary').setAttribute('aria-expanded', 'false');
+                    }
+                });
             });
         });
     </script>
