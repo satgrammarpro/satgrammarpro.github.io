@@ -833,7 +833,7 @@ const questionBanks = {
                     "Unnecessary details"
                 ],
                 correct: 1,
-                explanation: "Essential information identifies which specific thing you're talking about. For example: 'The book that won the Pulitzer Prize is on the table' (essential) vs. 'My copy of Moby *****, which won awards, is on the table' (non-essential)."
+                explanation: "Essential information identifies which specific thing you're talking about. For example: 'The book that won the Pulitzer Prize is on the table' (essential) vs. 'My copy of Moby Dick, which won awards, is on the table' (non-essential)."
             },
             {
                 question: "How is essential information punctuated?",
@@ -2287,135 +2287,7 @@ const questionBanks = {
 }
 };
 
-document.addEventListener('DOMContentLoaded', function() {
-    const navToggle = document.getElementById('navToggle');
-    const floatingNav = document.getElementById('floatingNav');
-    const navIcon = document.getElementById('navIcon');
-    
-    if (navToggle && floatingNav) {
-        navToggle.addEventListener('click', function() {
-            floatingNav.classList.toggle('active');
-            if (floatingNav.classList.contains('active')) {
-                navIcon.classList.remove('fa-bars');
-                navIcon.classList.add('fa-times');
-            } else {
-                navIcon.classList.remove('fa-times');
-                navIcon.classList.add('fa-bars');
-            }
-        });
-        
-        // Close nav when clicking outside
-        document.addEventListener('click', function(e) {
-            if (floatingNav.classList.contains('active') && 
-                !floatingNav.contains(e.target) && 
-                !navToggle.contains(e.target)) {
-                floatingNav.classList.remove('active');
-                navIcon.classList.remove('fa-times');
-                navIcon.classList.add('fa-bars');
-            }
-        });
-        
-        // Close nav when clicking on links
-        const navLinks = floatingNav.querySelectorAll('a');
-        navLinks.forEach(link => {
-            link.addEventListener('click', function() {
-                floatingNav.classList.remove('active');
-                navIcon.classList.remove('fa-times');
-                navIcon.classList.add('fa-bars');
-            });
-        });
-    }
-});
 
-// Floating navigation functionality
-function initFloatingNav() {
-    const floatingNav = document.getElementById('floatingNav');
-    const navToggle = document.getElementById('navToggle');
-    const navIcon = document.getElementById('navIcon');
-    
-    if (!floatingNav) return;
-    
-    let lastScrollTop = 0;
-    const navHeight = floatingNav.offsetHeight;
-    let isNavExpanded = false;
-    
-    // Handle scroll behavior
-    window.addEventListener('scroll', function() {
-        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        
-        if (window.innerWidth > 1024) {
-            // Desktop behavior - hide on scroll down, show on scroll up
-            if (scrollTop > lastScrollTop && scrollTop > navHeight) {
-                // Scrolling down
-                floatingNav.classList.add('hidden');
-            } else {
-                // Scrolling up
-                floatingNav.classList.remove('hidden');
-            }
-        } else {
-            // Mobile behavior - always visible when expanded
-            if (!isNavExpanded && scrollTop > lastScrollTop && scrollTop > navHeight) {
-                // Scrolling down - hide nav
-                floatingNav.classList.add('collapsed');
-            } else if (scrollTop < lastScrollTop) {
-                // Scrolling up - show nav
-                floatingNav.classList.remove('collapsed');
-            }
-        }
-        
-        lastScrollTop = scrollTop;
-    });
-    
-    // Toggle navigation on mobile
-    if (navToggle) {
-        navToggle.addEventListener('click', function() {
-            isNavExpanded = !isNavExpanded;
-            floatingNav.classList.toggle('expanded');
-            
-            // Change icon
-            if (isNavExpanded) {
-                navIcon.classList.remove('fa-bars');
-                navIcon.classList.add('fa-times');
-            } else {
-                navIcon.classList.remove('fa-times');
-                navIcon.classList.add('fa-bars');
-            }
-        });
-    }
-    
-    // Close mobile nav when clicking outside
-    document.addEventListener('click', function(event) {
-        if (isNavExpanded && 
-            !floatingNav.contains(event.target) && 
-            event.target !== navToggle && 
-            !navToggle.contains(event.target)) {
-            isNavExpanded = false;
-            floatingNav.classList.remove('expanded');
-            if (navIcon) {
-                navIcon.classList.remove('fa-times');
-                navIcon.classList.add('fa-bars');
-            }
-        }
-    });
-    
-    // Handle resize
-    window.addEventListener('resize', function() {
-        if (window.innerWidth > 1024) {
-            // Reset mobile states on desktop
-            isNavExpanded = false;
-            floatingNav.classList.remove('collapsed', 'expanded');
-            if (navIcon) {
-                navIcon.classList.remove('fa-times');
-                navIcon.classList.add('fa-bars');
-            }
-        }
-    });
-}
-
-// Initialize when page loads
-document.addEventListener('DOMContentLoaded', function() {
-    initFloatingNav();
-});
 class PracticeSession {
     constructor() {
         this.currentQuestions = [];
@@ -2427,15 +2299,11 @@ class PracticeSession {
     }
 
     // Initialize all practice sessions
-    initializeRuleSessions() {
-    // Check which rules exist on this page
-    for (let rule = 1; rule <= 16; rule++) {
-        const practiceSection = document.getElementById(`practice-questions-${rule}`);
-        if (practiceSection) {
+    initializeAllSessions() {
+        for (let rule = 1; rule <= 16; rule++) {
             this.setupPracticeSession(rule);
         }
     }
-}
 
     // Setup practice session for a specific rule
     setupPracticeSession(ruleNumber) {
@@ -2655,8 +2523,7 @@ const practiceSession = new PracticeSession();
 
 // Initialize when page loads
 document.addEventListener('DOMContentLoaded', function() {
-    const practiceSession = new PracticeSession();
-    practiceSession.initializeRuleSessions();
+    practiceSession.initializeAllSessions();
 });
 
 console.log(`Added ${options.length} option listeners for rule ${ruleNumber}`);
