@@ -782,12 +782,6 @@ button:disabled {
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
-.github-button svg {
-    width: 20px;
-    height: 20px;
-    fill: currentColor;
-}
-
 .github-button:hover,
 .github-button:focus-visible {
     background: #a40000;
