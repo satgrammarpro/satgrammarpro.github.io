@@ -551,6 +551,47 @@ button:disabled {
     line-height: 1.6;
 }
 
+.social-share {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+}
+
+.social-share span {
+    font-weight: 600;
+    color: var(--secondary);
+}
+
+.share-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: white;
+    color: var(--secondary);
+    border: 1px solid rgba(0,0,0,0.08);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    transition: var(--transition);
+}
+
+.share-link:hover,
+.share-link:focus-visible {
+    color: var(--primary);
+    transform: translateY(-2px);
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+}
+
+.share-link svg {
+    width: 18px;
+    height: 18px;
+    fill: currentColor;
+}
+
 /* GitHub Banner */
 .follow-github {
     text-align: center;
@@ -706,9 +747,12 @@ button:disabled {
 }
 
 .github-icon {
-    font-size: 4rem;
+    width: 64px;
+    height: 64px;
     color: var(--accent);
     flex-shrink: 0;
+    display: inline-flex;
+    fill: currentColor;
 }
 
 .github-section h3 {
@@ -756,8 +800,9 @@ button:disabled {
         text-align: center;
         gap: 1.5rem;
     }
-    
+
     .github-icon {
-        font-size: 3rem;
+        width: 48px;
+        height: 48px;
     }
 }
