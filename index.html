@@ -427,6 +427,26 @@
       margin-bottom: 0.35rem;
     }
 
+    /* Keep accordion open and static on desktop */
+    @media (min-width: 1025px) {
+      .accordion details {
+        overflow: visible;
+      }
+
+      .accordion summary {
+        cursor: default;
+        pointer-events: none;
+      }
+
+      .accordion summary .chevron {
+        display: none;
+      }
+
+      .accordion .content {
+        display: block;
+      }
+    }
+
     /* Footer */
     footer {
       background: linear-gradient(135deg, var(--dark), #1a1a1a);
@@ -656,48 +676,48 @@
                         </div>
                     </div>
                 </div>
-
-                <section>
-                    <h2>Why SAT Grammar Pro is High-Value</h2>
-                    <p>Every lesson is written by an SAT tutor and paired with explanations that show <em>why</em> each answer works. Difficulty filters let you move from foundational drills to challenging, test-like questions without leaving the page.</p>
-
-                    <div class="accordion" id="qualityAccordion">
-                        <details>
-                            <summary aria-expanded="false"><span class="label"><span class="icon"><i class="fas fa-book-open"></i></span>Lesson Quality &amp; Originality</span><span class="chevron">⌄</span></summary>
-                            <div class="content">
-                                <p>Rules and examples are paraphrased and expanded from years of tutoring, not copied from the College Board or other sites. Each question bank is unique to this site and reviewed to avoid ambiguous wording.</p>
-                                <ul>
-                                    <li>160+ practice questions with human-written explanations</li>
-                                    <li>Examples highlight the grammar concept before testing it</li>
-                                    <li>Updated wording to match the current digital SAT style</li>
-                                </ul>
-                            </div>
-                        </details>
-                        <details>
-                            <summary aria-expanded="false"><span class="label"><span class="icon"><i class="fas fa-shield-alt"></i></span>Ad Experience &amp; Policy Alignment</span><span class="chevron">⌄</span></summary>
-                            <div class="content">
-                                <p>Pages avoid auto-refreshing, misleading navigation, and AI-generated filler. Clear headings, canonical links, and robots tags help Google index the primary version of every page without duplicate clutter.</p>
-                                <ul>
-                                    <li>Concise layouts with no hidden text or doorway pages</li>
-                                    <li>ads.txt and robots.txt configured for transparent crawling</li>
-                                    <li>Educational intent only—no scraped or spun content</li>
-                                </ul>
-                            </div>
-                        </details>
-                        <details>
-                            <summary aria-expanded="false"><span class="label"><span class="icon"><i class="fas fa-check-circle"></i></span>How to Use This Resource</span><span class="chevron">⌄</span></summary>
-                            <div class="content">
-                                <p>Start with the rule summaries, then toggle question difficulty. Use the explanations after each attempt to understand the grammar logic, and revisit any rules where your score drops below 80%.</p>
-                                <ul>
-                                    <li>Switch difficulties to build from basics to SAT-level nuance</li>
-                                    <li>Rotate through categories weekly to keep skills fresh</li>
-                                    <li>Bookmark <strong>All Questions</strong> for full-length drills</li>
-                                </ul>
-                            </div>
-                        </details>
-                    </div>
-                </section>
             </div>
+
+            <section>
+                <h2>Why SAT Grammar Pro is High-Value</h2>
+                <p>Every lesson is written by an SAT tutor and paired with explanations that show <em>why</em> each answer works. Difficulty filters let you move from foundational drills to challenging, test-like questions without leaving the page.</p>
+
+                <div class="accordion" id="qualityAccordion">
+                    <details>
+                        <summary aria-expanded="false"><span class="label"><span class="icon"><i class="fas fa-book-open"></i></span>Lesson Quality &amp; Originality</span><span class="chevron">⌄</span></summary>
+                        <div class="content">
+                            <p>Rules and examples are paraphrased and expanded from years of tutoring, not copied from the College Board or other sites. Each question bank is unique to this site and reviewed to avoid ambiguous wording.</p>
+                            <ul>
+                                <li>160+ practice questions with human-written explanations</li>
+                                <li>Examples highlight the grammar concept before testing it</li>
+                                <li>Updated wording to match the current digital SAT style</li>
+                            </ul>
+                        </div>
+                    </details>
+                    <details>
+                        <summary aria-expanded="false"><span class="label"><span class="icon"><i class="fas fa-shield-alt"></i></span>Ad Experience &amp; Policy Alignment</span><span class="chevron">⌄</span></summary>
+                        <div class="content">
+                            <p>Pages avoid auto-refreshing, misleading navigation, and AI-generated filler. Clear headings, canonical links, and robots tags help Google index the primary version of every page without duplicate clutter.</p>
+                            <ul>
+                                <li>Concise layouts with no hidden text or doorway pages</li>
+                                <li>ads.txt and robots.txt configured for transparent crawling</li>
+                                <li>Educational intent only—no scraped or spun content</li>
+                            </ul>
+                        </div>
+                    </details>
+                    <details>
+                        <summary aria-expanded="false"><span class="label"><span class="icon"><i class="fas fa-check-circle"></i></span>How to Use This Resource</span><span class="chevron">⌄</span></summary>
+                        <div class="content">
+                            <p>Start with the rule summaries, then toggle question difficulty. Use the explanations after each attempt to understand the grammar logic, and revisit any rules where your score drops below 80%.</p>
+                            <ul>
+                                <li>Switch difficulties to build from basics to SAT-level nuance</li>
+                                <li>Rotate through categories weekly to keep skills fresh</li>
+                                <li>Bookmark <strong>All Questions</strong> for full-length drills</li>
+                            </ul>
+                        </div>
+                    </details>
+                </div>
+            </section>
         </section>
     </main>
     
@@ -792,9 +812,30 @@
                 }
             });
 
+            const syncAccordionForViewport = () => {
+                if (!accordion.length) return;
+
+                if (window.innerWidth > 1024) {
+                    accordion.forEach((panel) => {
+                        panel.open = true;
+                        const summary = panel.querySelector('summary');
+                        summary.setAttribute('aria-expanded', 'true');
+                        summary.setAttribute('aria-disabled', 'true');
+                    });
+                } else {
+                    accordion.forEach((panel) => {
+                        const summary = panel.querySelector('summary');
+                        summary.removeAttribute('aria-disabled');
+                        summary.setAttribute('aria-expanded', panel.open ? 'true' : 'false');
+                    });
+                }
+            };
+
             // Accessible accordion: ensure one panel opens at a time and works on desktop
             accordion.forEach((panel) => {
                 panel.addEventListener('toggle', () => {
+                    if (window.innerWidth > 1024) return;
+
                     if (panel.open) {
                         accordion.forEach((other) => {
                             if (other !== panel) {
@@ -808,6 +849,10 @@
                     }
                 });
             });
+
+            syncAccordionForViewport();
+
+            window.addEventListener('resize', syncAccordionForViewport);
         });
     </script>
 </body>
