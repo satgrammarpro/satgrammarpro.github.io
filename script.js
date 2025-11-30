@@ -2525,5 +2525,3 @@ const practiceSession = new PracticeSession();
 document.addEventListener('DOMContentLoaded', function() {
     practiceSession.initializeAllSessions();
 });
-
-console.log(`Added ${options.length} option listeners for rule ${ruleNumber}`);
